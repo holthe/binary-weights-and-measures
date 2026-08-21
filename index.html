@@ -34,11 +34,11 @@
 <meta name="twitter:description" content="A drive is sold in powers of ten and counted in powers of two. The shortfall is 9.05% at the terabyte, and nothing is broken.">
 <meta name="twitter:image" content="https://binary.besteffortindustries.com/og.png">
 <meta name="twitter:image:alt" content="Binary Division of Weights and Measures: an engineering drawing of a bar dimensioned 1 TB as advertised, its last 9.05% hatched in red, dimensioned 0.91 TiB as counted.">
-<title>Binary Division of Weights and Measures | Sold in tens, counted in twos</title>
+<title>Binary Division of Weights and Measures</title>
 <style>
   :root{
     --sheet:#e6eae4; --field:#f4f6f2; --graphite:#20242a; --line:#7d8790;
-    --line-2:#b3bcbf; --muted:#5c656d; --faint:#88919a; --short:#b03a1c; --spec:#2c6e63;
+    --line-2:#b3bcbf; --muted:#5c656d; --faint:#6c757e; --short:#b03a1c; --spec:#2c6e63;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -167,7 +167,7 @@
     <div class="controls">
       <div class="f">
         <label for="cap">Advertised capacity</label>
-        <input id="cap" type="number" min="1" step="1" value="1">
+        <input id="cap" type="number" min="1" max="1000000000" step="1" value="1">
       </div>
       <div class="f">
         <label for="unit">Unit printed on the box</label>
@@ -210,7 +210,7 @@
     <div class="sechead">Notes</div>
     <ol>
       <li><span><strong>Both readings are correct.</strong> The manufacturer shipped 10<sup>12</sup> bytes and called it a terabyte, which is what the SI prefix means. Your computer divided by 2<sup>40</sup> and printed the letters TB anyway, which is what it has always done.</span></li>
-      <li><span><strong>A standard exists and is ignored.</strong> IEC 80000-13 defined the kibibyte, mebibyte, gibibyte and tebibyte in 1998 precisely to end this. Adoption is complete in principle and absent in practice.</span></li>
+      <li><span><strong>A standard exists and is ignored.</strong> The binary prefixes were defined in 1999, by amendment to IEC 60027-2, and carried into IEC 80000-13 in 2008. The kibibyte has therefore been available for a quarter of a century. Adoption is complete in principle and absent in practice.</span></li>
       <li><span><strong>One machine uses both systems at once.</strong> Memory is sold in powers of two, storage in powers of ten, and network throughput in decimal bits. No component is at fault and every component disagrees.</span></li>
       <li><span><strong>The matter has been litigated.</strong> Suits were brought in the United States against drive manufacturers over this exact arithmetic and were settled. No storage was created.</span></li>
     </ol>
@@ -258,7 +258,10 @@
   function group(n){ return n.toLocaleString('en-US'); }
 
   function draw(){
-    var n = Math.max(1, Math.floor(+cap.value || 1));
+    var n = Math.floor(+cap.value);
+    if (!isFinite(n) || n < 1) n = 1;
+    if (n > 1e9) n = 1e9;  /* beyond this the readout is a joke about notation, not capacity */
+    if (String(cap.value) !== '' && +cap.value !== n) cap.value = n;
     var exp = +unit.value;
     var label = exp === 12 ? 'TB' : 'GB';
     var binLabel = exp === 12 ? 'TiB' : 'GiB';
