@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  Source for /og.png (1200x630). Rendered by `make og`.
+  Edit the copy here, not the PNG. Regenerate after any tagline change.
+  The card is the site in miniature: the drawing sheet, dimensioned, with
+  the shortfall hatched. The domain in the footer is the canonical host;
+  if the site moves, change it here too and re-run `make og`.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background: #e6eae4;
+    font-family: "Liberation Mono", "Courier New", monospace;
+    color: #20242a;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .sheet {
+    background: #f4f6f2; border: 3px solid #20242a;
+    width: 1000px; padding: 46px 54px 40px;
+    box-shadow: 0 22px 50px rgba(32,36,42,.18);
+  }
+  .unit { font-size: 16px; letter-spacing: .26em; text-transform: uppercase; color: #88919a; }
+  h1 { font-size: 46px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase;
+       line-height: 1.2; margin-top: 14px; }
+  .rule { margin-top: 30px; }
+  .dimline { display: flex; align-items: center; gap: 14px;
+             font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: #5c656d; }
+  .bar { height: 54px; border: 3px solid #20242a; display: flex; margin: 12px 0; }
+  .counted { flex: 0 0 90.95%; background: #c9d2cc; }
+  .short {
+    flex: 1; background: repeating-linear-gradient(45deg,
+      #b03a1c 0 4px, #ffffff 4px 11px);
+  }
+  .scalerow { display: flex; justify-content: space-between;
+              font-size: 15px; color: #5c656d; letter-spacing: .1em; }
+  .foot {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 0 60px 26px;
+    display: flex; justify-content: space-between;
+    font-size: 15px; color: #88919a;
+    text-transform: uppercase; letter-spacing: .13em;
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="unit">Weights and Measures, Binary</div>
+    <h1>Sold in powers of ten.<br>Counted in powers of two.</h1>
+    <div class="rule">
+      <div class="dimline">Advertised 1 TB &#183; 1,000,000,000,000 bytes</div>
+      <div class="bar"><div class="counted"></div><div class="short"></div></div>
+      <div class="scalerow"><span>Counted 0.91 TiB</span><span>Absent from the label: 9.05%</span></div>
+    </div>
+  </div>
+  <div class="foot">
+    <span>DOC: BEI-BWM</span>
+    <span>BINARY.BESTEFFORTINDUSTRIES.COM</span>
+    <span>Nothing is missing. Part of the number is.</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!-- Source for assets/logo.svg. Text is still live here; `make logo` runs
+     Inkscape with export-text-to-path so the committed logo does not depend
+     on the viewer's fonts. Courier New resolves through fontconfig to
+     Liberation Mono, which is metric-compatible (see the README's font
+     note), so the outlined result matches what the site renders. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 400" width="1240" height="400" role="img" aria-label="Binary Division of Weights and Measures">
+  <rect width="1240" height="400" fill="#e6eae4"/>
+  <rect x="40" y="30" width="1160" height="340" fill="#f4f6f2" stroke="#20242a" stroke-width="6"/>
+
+  <g transform="translate(96 96)">
+    <rect width="112" height="112" rx="10" fill="#20242a"/>
+    <text x="56" y="72" text-anchor="middle" font-family="Liberation Mono, Courier New, monospace" font-size="51" font-weight="bold" fill="#f4f6f2">Ki</text>
+    <rect x="28" y="84" width="56" height="6" fill="#b03a1c"/>
+  </g>
+
+  <text x="248" y="132" font-family="Liberation Mono, Courier New, monospace" font-size="21" letter-spacing="8" fill="#88919a">WEIGHTS AND MEASURES, BINARY</text>
+  <text x="248" y="192" font-family="Liberation Mono, Courier New, monospace" font-size="45" font-weight="bold" letter-spacing="1" fill="#20242a">BINARY DIVISION OF</text>
+  <text x="248" y="244" font-family="Liberation Mono, Courier New, monospace" font-size="45" font-weight="bold" letter-spacing="1" fill="#20242a">WEIGHTS AND MEASURES</text>
+
+  <g transform="translate(248 286)">
+    <rect width="800" height="34" fill="#c9d2cc" stroke="#20242a" stroke-width="3"/>
+    <rect x="727" width="73" height="34" fill="#ffffff" stroke="#20242a" stroke-width="3"/>
+    <g stroke="#b03a1c" stroke-width="4">
+      <line x1="731" y1="34" x2="765" y2="0"/>
+      <line x1="742" y1="34" x2="776" y2="0"/>
+      <line x1="753" y1="34" x2="787" y2="0"/>
+      <line x1="764" y1="34" x2="798" y2="0"/>
+    </g>
+  </g>
+  <text x="248" y="346" font-family="Liberation Mono, Courier New, monospace" font-size="19" letter-spacing="3" fill="#5c656d">ADVERTISED 1 TB &#183; COUNTED 0.91 TiB &#183; ABSENT 9.05%</text>
+</svg>

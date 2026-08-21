@@ -1,0 +1,10 @@
+<!-- Source for /favicon.svg. The text is still live here; `make favicon`
+     runs Inkscape with export-text-to-path so the committed icon does not
+     depend on the viewer having a monospace face. The mark is the binary
+     prefix from IEC 80000-13, ruled underneath in the colour this site
+     uses for everything that went missing. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Ki, the binary prefix, ruled underneath in red">
+  <rect width="64" height="64" fill="#20242a"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Liberation Mono, DejaVu Sans Mono, monospace" font-size="29" font-weight="bold" fill="#f4f6f2">Ki</text>
+  <rect x="16" y="48" width="32" height="3.5" fill="#b03a1c"/>
+</svg>

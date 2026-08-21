@@ -1,0 +1,13 @@
+<!-- Pixel-grid 16px icon for the smallest .ico entry. Two letters cannot
+     survive 16 pixels, so the mark reduces to the drawing instead: the bar
+     as sold, with the part that is not there hatched off at the end. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+  <rect width="16" height="16" fill="#20242a"/>
+  <rect x="2" y="6" width="12" height="5" fill="#f4f6f2"/>
+  <rect x="11" y="6" width="3" height="5" fill="#b03a1c"/>
+  <g fill="#8c959c">
+    <rect x="2" y="3" width="1" height="2"/>
+    <rect x="13" y="3" width="1" height="2"/>
+  </g>
+  <rect x="2" y="13" width="12" height="1" fill="#b03a1c"/>
+</svg>

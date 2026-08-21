@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Binary Division of Weights and Measures draws the gap between the byte as sold and the byte as counted. SI prefixes are decimal, IEC 80000-13 is binary, and a 1 TB drive arrives as 0.91 TiB.">
+<meta name="robots" content="index, follow">
+
+<!-- PRODUCTION DOMAIN, hardcoded. The Division has no domain of its own, so
+     its canonical host is a subdomain of the parent. If that ever changes,
+     edit the four absolute URLs below and the footer of tools/og.html, then
+     re-run `make og`. Those are the only two files that name it. -->
+<link rel="canonical" href="https://binary.besteffortindustries.com/">
+<meta name="theme-color" content="#e6eae4">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Binary Division of Weights and Measures">
+<meta property="og:url" content="https://binary.besteffortindustries.com/">
+<meta property="og:title" content="Binary Division of Weights and Measures">
+<meta property="og:description" content="A drive is sold in powers of ten and counted in powers of two. The shortfall is 9.05% at the terabyte, and nothing is broken.">
+<meta property="og:image" content="https://binary.besteffortindustries.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Binary Division of Weights and Measures: an engineering drawing of a bar dimensioned 1 TB as advertised, its last 9.05% hatched in red, dimensioned 0.91 TiB as counted.">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Binary Division of Weights and Measures">
+<meta name="twitter:description" content="A drive is sold in powers of ten and counted in powers of two. The shortfall is 9.05% at the terabyte, and nothing is broken.">
+<meta name="twitter:image" content="https://binary.besteffortindustries.com/og.png">
+<meta name="twitter:image:alt" content="Binary Division of Weights and Measures: an engineering drawing of a bar dimensioned 1 TB as advertised, its last 9.05% hatched in red, dimensioned 0.91 TiB as counted.">
+<title>Binary Division of Weights and Measures | Sold in tens, counted in twos</title>
+<style>
+  :root{
+    --sheet:#e6eae4; --field:#f4f6f2; --graphite:#20242a; --line:#7d8790;
+    --line-2:#b3bcbf; --muted:#5c656d; --faint:#88919a; --short:#b03a1c; --spec:#2c6e63;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--sheet);color:var(--graphite);
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    font-size:14px;line-height:1.6;padding:clamp(14px,3vw,34px) clamp(12px,3.5vw,26px) 60px;
+    font-variant-numeric:tabular-nums}
+  .prose{font-family:system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px}
+  :focus-visible{outline:2px solid var(--short);outline-offset:3px}
+
+  .drawing{max-width:960px;margin:0 auto;background:var(--field);
+    border:2px solid var(--graphite);box-shadow:0 18px 44px rgba(32,36,42,.16)}
+  .pad{padding-inline:clamp(24px,4.5vw,34px)}
+
+  /* drawing header, as a strip of fields */
+  .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    border-bottom:2px solid var(--graphite)}
+  .fields div{padding:11px clamp(14px,3vw,16px);border-right:1px solid var(--line-2)}
+  .fields div:last-child{border-right:0}
+  .fields dt{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .fields dd{margin-top:3px;font-size:13px}
+
+  .title{padding-block:30px 26px;border-bottom:1px solid var(--line-2)}
+  .markrow{display:flex;align-items:center;gap:clamp(14px,2.4vw,22px)}
+  .mark{width:clamp(52px,7vw,74px);height:auto;flex:none}
+  h1{font-size:clamp(17px,3.2vw,29px);font-weight:700;letter-spacing:.02em;text-transform:uppercase;
+    line-height:1.26;text-wrap:balance;overflow-wrap:break-word}
+  .strap{margin-top:12px;color:var(--muted);max-width:64ch}
+
+  /* the instrument: a measured bar */
+  .measure{padding-block:26px 30px;border-bottom:1px solid var(--line-2)}
+  .controls{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--graphite);margin-bottom:30px;background:#fff}
+  .controls .f{flex:1;min-width:190px;padding:12px 16px;border-right:1px solid var(--line-2)}
+  label{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  input,select{font:inherit;font-size:16px;width:100%;border:0;background:transparent;color:var(--graphite)}
+  button{font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--graphite);color:var(--field);border:0;padding:0 26px;cursor:pointer;flex:none}
+  button:hover{background:var(--short)}
+
+  .plate svg{width:100%;height:auto;display:block;overflow:visible}
+  .dim{stroke:var(--line);stroke-width:1}
+  .ext{stroke:var(--line-2);stroke-width:1;stroke-dasharray:3 3}
+  .barSold{fill:none;stroke:var(--graphite);stroke-width:2}
+  .barCount{fill:#c9d2cc}
+  .barShort{fill:url(#hatch)}
+  .tick{stroke:var(--line);stroke-width:1}
+  .lab{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;fill:var(--muted)}
+  .lab.b{fill:var(--graphite);font-weight:700}
+  .lab.r{fill:var(--short);font-weight:700}
+
+  .readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    border:1px solid var(--line-2);margin-top:26px;background:#fff}
+  .readout div{padding:15px clamp(14px,3vw,17px);border-right:1px solid var(--line-2)}
+  .readout div:last-child{border-right:0}
+  .readout b{display:block;font-size:19px;font-weight:700}
+  .readout b.short{color:var(--short)}
+  .readout span{display:block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:5px}
+
+  /* numbered notes, as drawings carry */
+  .notes{padding-block:28px;border-bottom:1px solid var(--line-2)}
+  .sechead{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--spec);font-weight:700;margin-bottom:16px}
+  ol{list-style:none;counter-reset:n;display:grid;gap:14px;max-width:74ch}
+  ol li{counter-increment:n;display:grid;grid-template-columns:34px 1fr;gap:12px;color:var(--muted)}
+  ol li:before{content:counter(n,decimal-leading-zero);color:var(--spec);font-weight:700}
+  ol li strong{color:var(--graphite);font-weight:700}
+
+  /* detail: the floppy, as a parts callout */
+  .detail{padding-block:28px;border-bottom:1px solid var(--line-2)}
+  table{width:100%;border-collapse:collapse;max-width:640px;margin-top:14px}
+  th{text-align:left;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);
+    padding:0 14px 8px 0;border-bottom:1px solid var(--graphite)}
+  th:last-child,td:last-child{text-align:right;padding-right:0}
+  td{padding:9px 14px 9px 0;border-bottom:1px solid var(--line-2)}
+  td:first-child{color:var(--muted)}
+  tr:last-child td{border-bottom:0}
+  .callout{margin-top:16px;border-left:3px solid var(--short);padding:12px 16px;background:#fff;max-width:66ch;color:var(--muted)}
+
+  /* title block, bottom right, as on a real drawing */
+  .titleblock{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-top:2px solid var(--graphite)}
+  .titleblock div{padding:13px clamp(14px,3vw,16px);border-right:1px solid var(--line-2)}
+  .titleblock div:last-child{border-right:0}
+  .titleblock dt{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .titleblock dd{margin-top:4px;font-size:12.5px}
+
+  footer{padding-block:22px 4px;font-size:11.5px;color:var(--faint);max-width:76ch}
+  footer p + p{margin-top:8px}
+  footer .doc{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
+  footer a{color:var(--muted)}
+
+  @media (max-width:640px){
+    /* the forced break makes a line too long for a phone */
+    h1 br{display:none}
+    .fields div{border-right:0;border-bottom:1px solid var(--line-2)}
+    .titleblock div{border-right:0;border-bottom:1px solid var(--line-2)}
+    .controls .f{border-right:0;border-bottom:1px solid var(--line-2)}
+    button{width:100%;padding:14px 0}
+    .readout div{border-bottom:1px solid var(--line-2)}
+    .readout div:nth-child(2n),.readout div:last-child{border-right:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="drawing">
+
+  <dl class="fields">
+    <div><dt>Division</dt><dd>Binary Weights &amp; Measures</dd></div>
+    <div><dt>Instrument</dt><dd>Scale rule, dual system</dd></div>
+    <div><dt>Standard</dt><dd>IEC 80000-13</dd></div>
+    <div><dt>Drawing</dt><dd>Rev A</dd></div>
+  </dl>
+
+  <div class="pad title">
+    <div class="markrow">
+      <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Division mark: Ki, the binary prefix, ruled underneath in red">
+        <rect width="64" height="64" rx="6" fill="#20242a"></rect>
+        <text x="32" y="41" text-anchor="middle" font-family="ui-monospace,&quot;SF Mono&quot;,Menlo,Consolas,&quot;Liberation Mono&quot;,monospace" font-size="29" font-weight="700" fill="#f4f6f2">Ki</text>
+        <rect x="16" y="48" width="32" height="3.5" fill="#b03a1c"></rect>
+      </svg>
+      <h1>Measured shortfall between the byte <br>as sold and the byte as counted</h1>
+    </div>
+    <p class="strap prose">A drive is sold in powers of ten and counted in powers of two. Nothing is missing from the hardware and nothing is wrong with the arithmetic. What goes missing is part of the number, and this drawing shows exactly which part.</p>
+  </div>
+
+  <div class="pad measure">
+    <div class="controls">
+      <div class="f">
+        <label for="cap">Advertised capacity</label>
+        <input id="cap" type="number" min="1" step="1" value="1">
+      </div>
+      <div class="f">
+        <label for="unit">Unit printed on the box</label>
+        <select id="unit">
+          <option value="12" selected>TB &middot; terabytes</option>
+          <option value="9">GB &middot; gigabytes</option>
+        </select>
+      </div>
+      <button id="go" type="button">Measure</button>
+    </div>
+
+    <div class="plate">
+    <svg id="scale" viewBox="0 0 900 250" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="scaleTitle">
+      <title id="scaleTitle">Scale drawing of advertised capacity against counted capacity, with the shortfall hatched</title>
+      <defs>
+        <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="7" height="7" fill="#fff"></rect>
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#b03a1c" stroke-width="2.4"></line>
+        </pattern>
+        <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#7d8790"></path>
+        </marker>
+        <marker id="arS" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#b03a1c"></path>
+        </marker>
+      </defs>
+      <g id="plot"></g>
+    </svg>
+    </div>
+
+    <div class="readout">
+      <div><b id="rSold"></b><span>Bytes shipped, decimal</span></div>
+      <div><b id="rCount"></b><span>As your computer counts it</span></div>
+      <div><b class="short" id="rShort"></b><span>Absent from the label</span></div>
+      <div><b class="short" id="rPct"></b><span>Of the quoted number</span></div>
+    </div>
+  </div>
+
+  <div class="pad notes">
+    <div class="sechead">Notes</div>
+    <ol>
+      <li><span><strong>Both readings are correct.</strong> The manufacturer shipped 10<sup>12</sup> bytes and called it a terabyte, which is what the SI prefix means. Your computer divided by 2<sup>40</sup> and printed the letters TB anyway, which is what it has always done.</span></li>
+      <li><span><strong>A standard exists and is ignored.</strong> IEC 80000-13 defined the kibibyte, mebibyte, gibibyte and tebibyte in 1998 precisely to end this. Adoption is complete in principle and absent in practice.</span></li>
+      <li><span><strong>One machine uses both systems at once.</strong> Memory is sold in powers of two, storage in powers of ten, and network throughput in decimal bits. No component is at fault and every component disagrees.</span></li>
+      <li><span><strong>The matter has been litigated.</strong> Suits were brought in the United States against drive manufacturers over this exact arithmetic and were settled. No storage was created.</span></li>
+    </ol>
+  </div>
+
+  <div class="pad detail">
+    <div class="sechead">Detail A &middot; unit belonging to neither system</div>
+    <p class="prose" style="color:var(--muted);max-width:66ch">The Division exhibits the 3.5-inch diskette as the worst object in its collection. Its capacity is 1,440 kibibytes. To reach the number printed on the label, the industry divided that by 1,000.</p>
+    <table>
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Printed on the label</td><td>1.44 MB</td></tr>
+        <tr><td>Actual capacity</td><td>1,474,560 bytes</td></tr>
+        <tr><td>In decimal megabytes</td><td>1.47 MB</td></tr>
+        <tr><td>In binary mebibytes</td><td>1.41 MiB</td></tr>
+        <tr><td>Prefix as used</td><td>1024 &times; 1000</td></tr>
+      </tbody>
+    </table>
+    <p class="callout prose">The megabyte on that label is neither decimal nor binary but a third quantity, invented once and printed several hundred million times. The Division has classified it as a unit of history and declines to calibrate against it.</p>
+  </div>
+
+  <dl class="titleblock">
+    <div><dt>Drawn by</dt><dd>The Division</dd></div>
+    <div><dt>Checked by</dt><dd>Nobody</dd></div>
+    <div><dt>Scale</dt><dd>Two, simultaneously</dd></div>
+    <div><dt>Reconciled</dt><dd>No</dd></div>
+  </dl>
+
+  <div class="pad">
+    <footer>
+      <div class="doc">DOC: BEI-BWM &#183; REV A / ISSUED / VALID IN BOTH SYSTEMS AT ONCE</div>
+      <p>The Binary Division of Weights and Measures is a division of <a href="https://besteffortindustries.com">Best Effort Industries</a> and holds no accreditation whatsoever. The arithmetic is real: SI prefixes are decimal, IEC 80000-13 defines the binary prefixes, and the two disagree by 6.87% at the gigabyte and 9.05% at the terabyte. The 1.44 MB diskette really is measured in a unit that exists nowhere else.</p>
+      <p>Measurements are taken locally in your browser and reported on a best-effort basis, in both systems, without reconciliation.</p>
+    </footer>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var cap = document.getElementById('cap'), unit = document.getElementById('unit');
+  var plot = document.getElementById('plot');
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(n, a){ var e = document.createElementNS(NS,n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function group(n){ return n.toLocaleString('en-US'); }
+
+  function draw(){
+    var n = Math.max(1, Math.floor(+cap.value || 1));
+    var exp = +unit.value;
+    var label = exp === 12 ? 'TB' : 'GB';
+    var binLabel = exp === 12 ? 'TiB' : 'GiB';
+    var div = exp === 12 ? Math.pow(2,40) : Math.pow(2,30);
+    var bytes = n * Math.pow(10, exp);
+    var counted = bytes / div;
+    var ratio = counted / n;
+    var missing = n - counted;
+    var pct = (missing / n) * 100;
+
+    /* draw at the page's own pixel size so every label renders at its true
+       size; no scaling, no sideways scrolling */
+    var svg = document.getElementById('scale');
+    var W = Math.max(280, Math.round(svg.getBoundingClientRect().width || svg.parentNode.clientWidth));
+    var narrow = W < 560;
+    var H = narrow ? 210 : 250;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+    var pad = narrow ? 16 : 54;
+    var X0 = pad, X1 = W - pad, Y = narrow ? 92 : 112, BH = narrow ? 38 : 46;
+    var barW = X1 - X0, wCount = barW * ratio;
+    var fs = narrow ? 10 : 11;
+
+    plot.textContent = '';
+    function txt(cls, x, y, str, anchor){
+      var t = el('text', {class:cls, x:x, y:y, 'font-size':fs});
+      if (anchor) t.setAttribute('text-anchor', anchor);
+      t.textContent = str; plot.appendChild(t); return t;
+    }
+
+    /* upper dimension: as advertised */
+    plot.appendChild(el('line', {class:'ext', x1:X0, y1:Y-10, x2:X0, y2:Y-40}));
+    plot.appendChild(el('line', {class:'ext', x1:X1, y1:Y-10, x2:X1, y2:Y-40}));
+    plot.appendChild(el('line', {class:'dim', x1:X0, y1:Y-32, x2:X1, y2:Y-32,
+                                 'marker-end':'url(#ar)', 'marker-start':'url(#ar)'}));
+    txt('lab b', (X0+X1)/2, Y-40, narrow ? ('ADVERTISED ' + n + ' ' + label)
+        : ('ADVERTISED ' + n + ' ' + label + '  =  ' + group(bytes) + ' BYTES'), 'middle');
+
+    /* the bar */
+    plot.appendChild(el('rect', {class:'barCount', x:X0, y:Y, width:wCount, height:BH}));
+    plot.appendChild(el('rect', {class:'barShort', x:X0+wCount, y:Y, width:barW-wCount, height:BH}));
+    plot.appendChild(el('rect', {class:'barSold', x:X0, y:Y, width:barW, height:BH}));
+
+    /* scale ticks */
+    var steps = narrow ? 4 : 10;
+    for (var i=0;i<=steps;i++){
+      var x = X0 + (barW*i/steps);
+      var major = i === 0 || i === steps || (!narrow && i === steps/2);
+      plot.appendChild(el('line', {class:'tick', x1:x, y1:Y+BH, x2:x, y2:Y+BH+(major?9:5)}));
+      if (major) txt('lab', x, Y+BH+22, (n*i/steps).toFixed(exp===12?2:0) + ' ' + label, 'middle');
+    }
+
+    /* lower dimension: as counted */
+    plot.appendChild(el('line', {class:'ext', x1:X0, y1:Y+BH+28, x2:X0, y2:Y+BH+58}));
+    plot.appendChild(el('line', {class:'ext', x1:X0+wCount, y1:Y+BH+28, x2:X0+wCount, y2:Y+BH+58}));
+    plot.appendChild(el('line', {class:'dim', x1:X0, y1:Y+BH+50, x2:X0+wCount, y2:Y+BH+50,
+                                 'marker-end':'url(#ar)', 'marker-start':'url(#ar)'}));
+    txt('lab b', X0 + wCount/2, Y+BH+68,
+        'COUNTED ' + counted.toFixed(2) + ' ' + binLabel + (narrow ? '' : ' (PRINTED AS ' + label + ')'), 'middle');
+
+    /* the shortfall needs no callout: the hatched zone shows it, and the
+       readout below states it twice over */
+
+    document.getElementById('rSold').textContent = group(bytes);
+    document.getElementById('rCount').textContent = counted.toFixed(2) + ' ' + binLabel;
+    document.getElementById('rShort').textContent = '−' + missing.toFixed(2) + ' ' + label;
+    document.getElementById('rPct').textContent = pct.toFixed(2) + '%';
+  }
+
+  var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(draw, 120); });
+
+  document.getElementById('go').addEventListener('click', draw);
+  cap.addEventListener('input', draw);
+  unit.addEventListener('change', draw);
+  draw();
+})();
+</script>
+
+</body>
+</html>

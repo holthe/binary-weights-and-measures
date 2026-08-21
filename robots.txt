@@ -1,0 +1,8 @@
+# Crawl freely. The Division measures; it does not restrict.
+
+User-agent: *
+Allow: /
+
+# There is no sitemap. There is one drawing and a 404.
+# Any index of this site will be reported in whichever unit
+# your indexer prefers, which is the entire problem.
